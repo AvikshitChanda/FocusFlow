@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import ClockLoader from "react-spinners/ClockLoader";
 import './App.css';
+import { useEffect, useState } from "react";
+import MyTimer from "./Timer";
 
 function App() {
+  const [Loading,setLoading]=useState(false);
+
+  useEffect(()=>{
+    setLoading(true);
+    setTimeout(()=>{
+      setLoading(false);
+    },2500)
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {Loading?(
+         <ClockLoader
+         color={' #fff'}
+         loading={Loading}
+         size={110}
+         aria-label="Loading Spinner"
+         data-testid="loader"
+       />
+      ):
+              
+        <MyTimer/>
+      
+
+      }
     </div>
+        
   );
 }
 
